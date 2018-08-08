@@ -10,14 +10,25 @@ class taskTable extends Component {
 
     onTaskDelete(index){ this.props.onTaskDelete(index); }
     render() {
+        let TaskList;
+        if(!this.props.flag) {
+            TaskList = this.props.taskList.map((name, index) =>
 
-        let TaskList =  this.props.taskList.map((name,index)=>
+                <div key={index}>
+                    <li>{name}</li>
+                    <input type="button" value="Delete" onClick={() => this.onTaskDelete(index)}/>
+                </div>
+            );
+        }
+        else{
+            TaskList = this.props.taskList.map((name, index) =>
+                <div key={index}>
+                    <li>{name.task}</li>
+                    <input type="button" value="Delete" onClick={() => this.onTaskDelete(name.id)}/>
+                </div>
+            );
 
-          <div key ={index}>
-            <li>{name}</li>
-            <input type="button" value="Delete" onClick={()=> this.onTaskDelete(index)}/>
-          </div>
-        );
+        }
         return (
             <div className="taskTable">
                 <ol>
